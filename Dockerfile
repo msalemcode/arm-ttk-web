@@ -37,6 +37,9 @@ COPY . .
 WORKDIR "/src/."
 RUN dotnet build "ArmValidation.csproj" -c Release -o /app/build
 
+FROM build AS publish
+RUN dotnet publish "ArmValidation.csproj" -c Release -o /app/publish /p:UseAppHost=false
+
 # Set the image used for running the container to the base image
 FROM base AS final
 
